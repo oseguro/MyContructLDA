@@ -25,7 +25,7 @@ SECRET_KEY = '2iowb9pawa*866wo-4hcsk2l2pvxx@)fvxx)(&d11sg#j(2_uf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [intense-springs-93832.herokuapp.com]
 
 
 # Application definition
