@@ -1,1 +1,1 @@
-web: sh -c "cd MyConstructLDA && gunicorn MyConstructLDA.wsgi"
+web: sh -c "cd MyContructLDA && gunicorn MyContructLDA.wsgi"
