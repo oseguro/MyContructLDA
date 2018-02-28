@@ -2,26 +2,30 @@
 {% load staticfiles %}
 {% block content %}
 <div class="row">
-    {% for treasure in treasures|dictsort:'name' %}
+    {% for projeto in projetos|dictsort:'data_registo' %}
     <div class="col-md-3">
-        <a href="/{{ treasure.id }}/">
-            <div class="tracker panel panel-default">
+        <a href="/{{ projeto.id }}/">
+            <div class="treasure panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">{{ treasure.name }}</h2>
+                    <h2 class="panel-title">{{ projeto.descricao }}</h2>
                 </div>
                 <div class="panel-body">
-                    <div class="tracker-photo">
-                        <img src="{{ treasure.image.url }}" alt="" height="300" />
+                    <div class="treasure-photo">
+                        <img src="{{ projeto.imagem.url }}" alt="" />
                     </div>
+                </div>
+                <div class="panel-heading">
+                    <p>Inserido em: {{ projeto.data_registo }}</p>
                 </div>
             </div>
         </a>
-            <button id="likes" data-id="{{treasure.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
-                        {% if treasure.likes > 0 %} {{ treasure.likes }} {% endif %}
+            <button id="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
+                        {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
             </button>
     </div>
     {% endfor %}
 </div>
+
 <div class="row" style="margin:3%">
     <h3>Categorias</h3>
 </div>
@@ -29,6 +33,16 @@
       {% for categoria in categorias %}
       <div class="col-md-3">
           <p>{{ categoria.categoria }}</p>
+      </div>
+    {% endfor %}
+</div>
+<div class="row" style="margin:3%">
+    <h3>Estilos</h3>
+</div>
+<div class="row" style="margin:3%">
+      {% for estilo in estilos %}
+      <div class="col-md-3">
+          <p>{{ estilo.estilo }}</p>
       </div>
     {% endfor %}
 </div>

@@ -8,12 +8,14 @@ from .forms import *
 def home(request):
     treasures = Treasure.objects.all()
     categorias = Categoria.objects.all()
+    estilos = Estilo.objects.all();
+    projetos = Projetos.objects.all()
     form = TreasureForm()
-    return render(request, 'home.html', {'treasures': treasures,'categorias': categorias,'form':form})
+    return render(request, 'home.html', {'treasures': treasures,'projetos':projetos, 'categorias': categorias,'estilos': estilos,'form':form})
 
 def detail(request, treasure_id):
-    treasure = Treasure.objects.get(id=treasure_id)
-    return render(request, 'detail.html', {'treasure': treasure})
+    projeto = Projetos.objects.get(id=projeto_id)
+    return render(request, 'detail.html', {'projeto': projeto})
 
 def post_treasure(request):
     form = TreasureForm(request.POST,request.FILES)
@@ -24,14 +26,14 @@ def post_treasure(request):
 
 
 def like_treasure(request):
-    treasure_id = request.POST.get('treasure_id', None)
+    projeto_id = request.POST.get('projeto_id', None)
     likes = 0
-    if treasure_id:
-        treasure = Treasure.objects.get(id=int(treasure_id))
-        if treasure is not None:
-            likes = treasure.likes + 1
-            treasure.likes = likes
-            treasure.save()
+    if projeto_id:
+        projeto = Projetos.objects.get(id=int(projeto_id))
+        if projeto is not None:
+            likes = projeto.likes + 1
+            projeto.likes = likes
+            projeto.save()
 
     return HttpResponse(likes)
 

@@ -26,7 +26,7 @@ $('button').on('click', function(event){
     $.ajax({
         url : '/like_treasure/',
         type : 'POST',
-        data : { treasure_id : $(this).attr("data-id")},
+        data : { projeto_id : $(this).attr("data-id")},
 
         success : function(data){
             element.html(' ' + data);

@@ -39,6 +39,7 @@ class Projetos(models.Model):
     descricao = models.CharField(max_length=250)
     divisao = models.ForeignKey('Divisao', on_delete=models.CASCADE)
     estilo = models.ForeignKey('Estilo', on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to='treasure_images', default='media/default.png')
     likes = models.IntegerField(default=0)
     
     def __str__(self):

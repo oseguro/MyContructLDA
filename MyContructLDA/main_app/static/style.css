@@ -3,7 +3,7 @@
 /* ----- Bootstrap Theme ----- */
 
 body {
-  background:  #f3e1c5 url(../images/brand-bg.jpg) no-repeat center top;
+  background:  #f3e1c5;
   color: #263d2c;
 }
 
@@ -12,8 +12,9 @@ h1 {
 }
 
 .container {
-  max-width: 900px;
-  padding-top: 40px;
+  max-width: 90%;
+  padding-top: 20px;
+  max-height: 90%;
 }
 
 .navbar {
@@ -104,7 +105,7 @@ h1 {
 }
 
 .treasure-photo img {
-  width: 180px;
+  width: 100%;
   max-height: 100%;
 }
 

@@ -5,29 +5,46 @@
 <head>
 	<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" media="screen">
 	<link href="{% static 'style.css' %}" rel="stylesheet" media="screen">
-	<title>TreasureGram</title>
+	<title>MyContructLDA</title>
 </head>
 <body>
 
   <nav class="navbar navbar-default navbar-static-top text-center" role="navigation">
-    <a href="/"><img src="{% static "images/logo.png" %}" height="90"  ></a>
+    <div class="col-md-3" >
+      <a href="/"><img src="{% static "images/logo.png" %}" height="90"  ></a>
+    </div>
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-4">
     {% if user.is_authenticated %}
-        <a class="navbar-text navbar-right" href="{% url 'profile' user.username %}">{{ user.username }}</a>
+        <a class="navbar-text navbar-right" href="{% url 'profile' user.username %}">Benvindo ao MyContructLDA, {{ user.username }}</a>
         <a class="navbar-text navbar-right" href="{% url 'Logout' %}">Logout</a>
     {% else %}
         <a class="navbar-text navbar-right" href="{% url 'Login' %}">Login</a>
     {% endif %}
+    </div>
   </nav>
 
-  <main class="container container--mw700">
+  <main class="container">
     {% block content %}
     {% endblock %}
   </main>
 
   <footer class="footer container text-center" role="contentinfo">
-  <img src="{% static 'images/brand-icon.png' %}" height="50" alt="">
-  © TreasureGram 2016
-  <img src="{% static 'images/brand-icon.png' %}" height="50" alt="">
+  <div class="row">
+    <div class="col-md-4">
+     Facebook
+    </div>
+    <div class="col-md-4">
+     Contatos
+     <p style="font-size:12px">Email: blabla@blabla.com</p>
+    </div>
+    <div class="col-md-4">
+     Facebook
+    </div>
+
+  </div>
+       © MyContructLDA 2018
 </footer>
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>

@@ -7,41 +7,48 @@
   <div class="treasure panel panel-default">
 
     <div class="panel-heading">
-          <h3 class="panel-title">{{ treasure.name }}</h3>
-          <a class="panel-username" href="/user/{{treasure.user.username}}/">by: {{ treasure.user.username }}</a>
+          <h3 class="panel-title">{{ treasure.descricao }}</h3>
+          <!--<a class="panel-username" href="/user/{{treasure.user.username}}/">by: {{ treasure.user.username }}</a>-->
         </div>
 
     <div class="panel-body">
       <div class="treasure-photo-detail">
-        <img src="{{ treasure.image.url }}" height="200">
+        <img src="{{ projeto.imagem.url }}" height="200">
       </div>
       <table class="treasure-table">
         <tr>
           <th>
-            <img src="{% static "images/location-icon.png" %}" alt="Location Icon">
-            Location:
+          
+            Distrito:
           </th>
-          <td>{{ treasure.location }}</td>
+          <td>{{ projeto.distrito }}</td>
 
         </tr>
         <tr>
           <th>
-            <img src="{% static "images/value-icon.png" %}" alt="Value Icon">
-            Value:
+           
+            Estilo:
           </th>
-          <td>${{ treasure.value }}</td>
+          <td>${{ projeto.estilo }}</td>
         </tr>
         <tr>
           <th>
-            <img src="{% static "images/material-icon.png" %}" alt="Material Icon">
-            Material:
+            
+            Divisão:
           </th>
-          <td>{{ treasure.material }}</td>
+          <td>{{ projeto.divisao }}</td>
+        </tr>
+                <tr>
+          <th>
+            
+            Data de registo:
+          </th>
+          <td>{{ projeto.data_registo }}</td>
         </tr>
       </table>
 
-      <button id ="likes" data-id="{{treasure.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
-            {% if treasure.likes > 0 %} {{ treasure.likes }} {% endif %}
+      <button id ="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
+            {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
           </button>
     </div>
 
