@@ -13,8 +13,8 @@ def home(request):
     form = TreasureForm()
     return render(request, 'home.html', {'treasures': treasures,'projetos':projetos, 'categorias': categorias,'estilos': estilos,'form':form})
 
-def detail(request, projeto_id):
-    projeto = Projetos.objects.get(id=projeto_id)
+def detail(request, slug):
+    projeto = Projetos.objects.get(slug=slug)
     return render(request, 'detail.html', {'projeto': projeto})
 
 def post_treasure(request):

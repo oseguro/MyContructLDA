@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+
 
 class Treasure(models.Model):
     name = models.CharField(max_length=100)
@@ -42,7 +44,13 @@ class Projetos(models.Model):
     estilo = models.ForeignKey('Estilo', on_delete=models.CASCADE)
     imagem = models.ImageField(upload_to='treasure_images', default='media/default.png')
     likes = models.IntegerField(default=0)
-    
+    slug = models.SlugField(max_length=100, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            slug = slugify(self.titulo)
+        super(Projetos,self).save(*args, **kwargs)
+
     def __str__(self):
         return self.titulo
 

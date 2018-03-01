@@ -89,7 +89,7 @@ h1 {
   float: left;
   margin-right: 5%;
   padding: 20px;
-  position: relative;
+  position: static;
   text-align: center;
   width: 100%;
 }

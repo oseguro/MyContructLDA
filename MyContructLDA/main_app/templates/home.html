@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+<div class="row" style="margin:3%">
+    <h3>Projetos</h3>
+</div>
 <div class="row">
     {% for projeto in projetos|dictsort:'data_registo' %}
-    <div class="col-md-3">
-        <a href="/{{ projeto.id }}/">
+    <div class="col-md-4">
+        <a href="/{{ projeto.slug }}/">
             <div class="treasure panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title">{{ projeto.titulo }}</h2>
                 </div>
                 <div class="panel-body">
                     <div class="treasure-photo">
-                        <img src="{{ projeto.imagem.url }}" alt="" />
+                        <img src="{{ projeto.imagem.url }}" alt="" height="250px" />
                     </div>
                 </div>
                 <div class="panel-heading">
@@ -19,8 +22,8 @@
                 </div>
             </div>
         </a>
-            <button id="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
-                        {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
+            <button id="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger" type="button">
+                    <span class="glyphicon glyphicon-heart"></span>{% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
             </button>
     </div>
     {% endfor %}
@@ -46,11 +49,11 @@
       </div>
     {% endfor %}
 </div>
-<div class="tracker panel panel-default">
+<!--<div class="tracker panel panel-default">
     <form enctype="multipart/form-data" action="post_treasure/" method="post">
        {% csrf_token %} 
        {{ form.as_p }}
         <input class="btn btn-primary" type="submit" value="Submit"/>
     </form>
-</div>
+</div>-->
 {% endblock %}
