@@ -48,7 +48,7 @@ class Projetos(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            slug = slugify(self.titulo)
+            self.slug = slugify(self.titulo)
         super(Projetos,self).save(*args, **kwargs)
 
     def __str__(self):
