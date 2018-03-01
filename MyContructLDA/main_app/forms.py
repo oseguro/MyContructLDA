@@ -29,7 +29,7 @@ class EstiloForm(forms.ModelForm):
 class ProjetosForm(forms.ModelForm):
     class Meta:
         model = Projetos
-        fields = ['data_registo','imagem', 'distrito','descricao','divisao','estilo','likes']
+        fields = ['data_registo','titulo','imagem', 'distrito','descricao','divisao','estilo','likes']
 
 
 

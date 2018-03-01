@@ -36,6 +36,7 @@ class Estilo(models.Model):
 class Projetos(models.Model):
     data_registo = models.CharField(max_length=100)
     distrito = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=100)
     descricao = models.CharField(max_length=250)
     divisao = models.ForeignKey('Divisao', on_delete=models.CASCADE)
     estilo = models.ForeignKey('Estilo', on_delete=models.CASCADE)
@@ -43,7 +44,7 @@ class Projetos(models.Model):
     likes = models.IntegerField(default=0)
     
     def __str__(self):
-        return self.descricao
+        return self.titulo
 
 
 

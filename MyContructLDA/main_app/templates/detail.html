@@ -7,13 +7,13 @@
   <div class="treasure panel panel-default">
 
     <div class="panel-heading">
-          <h3 class="panel-title">{{ treasure.descricao }}</h3>
+          <h3 class="panel-title">{{ projeto.titulo }}</h3>
           <!--<a class="panel-username" href="/user/{{treasure.user.username}}/">by: {{ treasure.user.username }}</a>-->
         </div>
 
     <div class="panel-body">
       <div class="treasure-photo-detail">
-        <img src="{{ projeto.imagem.url }}" height="200">
+        <img src="{{ projeto.imagem.url }}" height="250px">
       </div>
       <table class="treasure-table">
         <tr>
@@ -29,7 +29,7 @@
            
             Estilo:
           </th>
-          <td>${{ projeto.estilo }}</td>
+          <td>{{ projeto.estilo }}</td>
         </tr>
         <tr>
           <th>
@@ -37,6 +37,13 @@
             Divisão:
           </th>
           <td>{{ projeto.divisao }}</td>
+        </tr>
+         <tr>
+          <th>
+            
+            Descrição:
+          </th>
+          <td>{{ projeto.descricao }}</td>
         </tr>
                 <tr>
           <th>
