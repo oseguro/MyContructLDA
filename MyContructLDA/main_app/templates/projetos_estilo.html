@@ -8,7 +8,7 @@
 <div class="row">
     {% for projeto in projetos|dictsort:'data_registo' %}
     <div class="col-md-4">
-        <a href="/{{ projeto.slug }}/">
+        <a href="{% url 'detail' projeto.slug %}">
             <div class="treasure panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title">{{ projeto.titulo }}</h2>

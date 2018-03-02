@@ -115,3 +115,8 @@ def categorias_view(request,slug):
     categoria_proj = Categoria.objects.get(slug=slug)
     projeto = Projetos.objects.filter(categoria = categoria_proj)
     return render(request, 'projetos_categorias.html', {'projetos': projeto})
+
+
+def projetos(request):
+    projetos = Projetos.objects.all()
+    return render(request, 'projetos.html', {'projetos': projetos})

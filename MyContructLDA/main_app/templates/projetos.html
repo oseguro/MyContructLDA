@@ -29,30 +29,6 @@
     {% endfor %}
 </div>
 
-<div class="row" style="margin:3%">
-    <h3>Categorias</h3>
-</div>
-<div class="row" style="margin:3%">
-      {% for categoria in categorias %}
-      <div class="col-md-3">
-          <a href="{% url 'projetos_categorias' categoria.slug %}">
-            <p>{{ categoria.categoria }}</p>
-          </a>
-      </div>
-    {% endfor %}
-</div>
-<div class="row" style="margin:3%">
-    <h3>Estilos</h3>
-</div>
-<div class="row" style="margin:3%">
-      {% for estilo in estilos %}
-      <div class="col-md-3">
-          <a href="{% url 'projetos_estilo' estilo.slug %}">
-          <p>{{ estilo.estilo }}</p>
-          </a>
-      </div>
-    {% endfor %}
-</div>
 <!--<div class="tracker panel panel-default">
     <form enctype="multipart/form-data" action="post_treasure/" method="post">
        {% csrf_token %} 
