@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -102,3 +103,15 @@ def register(request):
   #      return JsonResponse({'results':results})
  #   else:
   #      return render(request, 'search.html')
+
+
+def estilos_view(request,slug):
+    estilo_proj = Estilo.objects.get(slug=slug)
+    projeto = Projetos.objects.filter(estilo = estilo_proj)
+    return render(request, 'projetos_estilo.html', {'projetos': projeto})
+
+
+def categorias_view(request,slug):
+    categoria_proj = Categoria.objects.get(slug=slug)
+    projeto = Projetos.objects.filter(categoria = categoria_proj)
+    return render(request, 'projetos_categorias.html', {'projetos': projeto})

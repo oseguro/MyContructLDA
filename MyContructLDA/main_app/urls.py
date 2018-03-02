@@ -7,11 +7,13 @@ urlpatterns = [
     url(r'^$', views.home, name = 'home'),
     url(r'^user/(\w+)/$', views.profile, name='profile'),
     url(r'post_treasure/', views.post_treasure, name='post_treasure'),
-    url(r'^([a-z0-9-]+)/$', views.detail, name = 'detail'),
+    url(r'^(?P<slug>[-\w]+)/$', views.detail, name = 'detail'),
     url(r'^login/$', views.login_view, name='Login'),
     url(r'^logout/$', views.logout_view, name='Logout'),
-    url(r'^like_treasure/$', views.like_treasure, name='like_treasure' ),
+    url(r'^like_treasure/$', views.like_treasure, name='like_treasure'),
     url(r'^register/$', views.register, name = 'register'),
+    url(r'^estilos/(?P<slug>[-\w]+)/$', views.estilos_view, name = 'projetos_estilo'),
+    url(r'^categorias/(?P<slug>[-\w]+)/$', views.categorias_view, name = 'projetos_categorias'),
 ]
 
 if settings.DEBUG:

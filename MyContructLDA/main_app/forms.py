@@ -11,7 +11,7 @@ class TreasureForm(forms.ModelForm):
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
-        fields = ['categoria']
+        fields = ['categoria','slug']
 
 
 class TipoImovelForm(forms.ModelForm):
@@ -23,13 +23,13 @@ class TipoImovelForm(forms.ModelForm):
 class EstiloForm(forms.ModelForm):
     class Meta:
         model = Estilo
-        fields = ['estilo']
+        fields = ['estilo','slug']
 
 
 class ProjetosForm(forms.ModelForm):
     class Meta:
         model = Projetos
-        fields = ['data_registo','titulo','imagem', 'distrito','descricao','divisao','estilo','likes','slug']
+        fields = ['data_registo','titulo','imagem', 'distrito','descricao','divisao','estilo','likes','slug','categoria']
 
 
 

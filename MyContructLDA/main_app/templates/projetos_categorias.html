@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+
 <div class="row" style="margin:3%">
     <h3>Projetos</h3>
 </div>
@@ -29,35 +30,5 @@
     {% endfor %}
 </div>
 
-<div class="row" style="margin:3%">
-    <h3>Categorias</h3>
-</div>
-<div class="row" style="margin:3%">
-      {% for categoria in categorias %}
-      <div class="col-md-3">
-          <a href="categorias/{{ categoria.slug }}/">
-            <p>{{ categoria.categoria }}</p>
-          </a>
-      </div>
-    {% endfor %}
-</div>
-<div class="row" style="margin:3%">
-    <h3>Estilos</h3>
-</div>
-<div class="row" style="margin:3%">
-      {% for estilo in estilos %}
-      <div class="col-md-3">
-          <a href="estilos/{{ estilo.slug }}/">
-          <p>{{ estilo.estilo }}</p>
-          </a>
-      </div>
-    {% endfor %}
-</div>
-<!--<div class="tracker panel panel-default">
-    <form enctype="multipart/form-data" action="post_treasure/" method="post">
-       {% csrf_token %} 
-       {{ form.as_p }}
-        <input class="btn btn-primary" type="submit" value="Submit"/>
-    </form>
-</div>-->
+
 {% endblock %}

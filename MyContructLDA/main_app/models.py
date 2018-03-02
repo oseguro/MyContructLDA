@@ -27,7 +27,12 @@ class Divisao(models.Model):
 
 class Estilo(models.Model):
     estilo = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.estilo)
+        super(Estilo,self).save(*args, **kwargs)
 
     def __str__(self):
         return self.estilo
@@ -45,7 +50,8 @@ class Projetos(models.Model):
     imagem = models.ImageField(upload_to='treasure_images', default='media/default.png')
     likes = models.IntegerField(default=0)
     slug = models.SlugField(max_length=100, blank=True)
-
+    categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
+    
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = slugify(self.titulo)
@@ -82,7 +88,12 @@ class PedidoOrcamento(models.Model):
 
 class Categoria(models.Model):
     categoria = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.categoria)
+        super(Categoria,self).save(*args, **kwargs)
 
     def __str__(self):
         return self.categoria
