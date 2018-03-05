@@ -19,6 +19,17 @@ $('#search-form').on('submit', function(event){
 });
 
 
+// Função para o menu ficar com a class = active
+$(function(){
+		$('#cssmenu a').filter(function(){return this.href==location.href}).parent().addClass('active').siblings().removeClass('active')
+		$('#cssmenu a').click(function(){
+			$(this).parent().addClass('active').siblings().removeClass('active')	
+		})
+	})
+
+////////////////////////////////////////////////
+
+
 $('button').on('click', function(event){
     event.preventDefault();
     var element = $(this);
