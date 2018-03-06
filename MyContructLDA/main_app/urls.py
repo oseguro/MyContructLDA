@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^estilos/(?P<slug>[-\w]+)/$', views.estilos_view, name = 'projetos_estilo'),
     url(r'^categorias/(?P<slug>[-\w]+)/$', views.categorias_view, name = 'projetos_categorias'),
     url(r'^projetos/$', views.projetos, name = 'projetos'),
+    url(r'^procurar/$',views.search, name='procurar'),
 ]
 
 if settings.DEBUG:

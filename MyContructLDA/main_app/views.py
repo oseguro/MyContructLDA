@@ -10,7 +10,8 @@ def home(request):
     treasures = Treasure.objects.all()
     categorias = Categoria.objects.all()
     estilos = Estilo.objects.all();
-    projetos = Projetos.objects.all()
+    projetos = Projetos.objects.all().order_by('created_at')[:8]
+    #projetos_top = reversed(projetos)
     form = TreasureForm()
     return render(request, 'home.html', {'treasures': treasures,'projetos':projetos, 'categorias': categorias,'estilos': estilos,'form':form})
 
@@ -90,19 +91,20 @@ def register(request):
     return render(request, 'registration.html', {'form': form})
 
 
-#def search(request):
-  #  search_val = request.GET.get('search', None)
-  #  if (search_val != None):
-  #      results = []
-   #     treasures = Treasure.objects.filter(name__icontains=search_val)
-  #      for treasure in treasures:
-           # json = {}
-           # json['name'] = treasure.name
-           # json['link'] = '/' + str(treasure.id) + '/'
-           # results.append(json)
-  #      return JsonResponse({'results':results})
- #   else:
-  #      return render(request, 'search.html')
+def search(request):
+    search_val = request.GET.get('search', None)
+    if (search_val != None):
+        results = []
+        projetos = Projetos.objects.filter(titulo__icontains=search_val)
+        for projeto in projetos:
+            json = {}
+            json['titulo'] = projeto.titulo
+            json['slug'] = '/projetos/detalhes/' + str(projeto.slug) + '/'
+            results.append(json)
+        return JsonResponse({'results':results})
+    else:
+        return render(request, 'search.html')
+
 
 
 def estilos_view(request,slug):

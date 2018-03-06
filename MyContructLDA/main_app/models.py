@@ -51,6 +51,7 @@ class Projetos(models.Model):
     likes = models.IntegerField(default=0)
     slug = models.SlugField(max_length=100, blank=True)
     categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
     
     def save(self, *args, **kwargs):
         if not self.pk:

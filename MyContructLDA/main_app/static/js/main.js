@@ -2,7 +2,7 @@ $('#search-form').on('submit', function(event){
     event.preventDefault();
 
     $.ajax({
-        url : '/search/',
+        url : '/procurar/',
         method : 'GET',
         data : { search : $('#search-text').val() },
         
@@ -11,8 +11,8 @@ $('#search-form').on('submit', function(event){
             element.empty()
             for ( var i = 0, l = json.results.length; i < l; i++ ) {
                 element.append('<li class="list-group-item">' +
-                               '<a href="' + json.results[i].link + '">'  + 
-                               json.results[i].name + '</a></li>');
+                               '<a href="' + json.results[i].slug + '">'  + 
+                               json.results[i].titulo + '</a></li>');
             }
         }
     });

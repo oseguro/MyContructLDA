@@ -3,7 +3,7 @@
 
 {% block content %}
 
-
+<div class="row">
   <div class="treasure panel panel-default">
 
     <div class="panel-heading">
@@ -48,18 +48,18 @@
                 <tr>
           <th>
             
-            Data de registo:
+            Projeto realizado:
           </th>
           <td>{{ projeto.data_registo }}</td>
         </tr>
       </table>
 
+
+    </div>
       <button id ="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
             {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
-          </button>
-    </div>
-
+      </button>
   </div>
 
-
+</div>
 {% endblock %}

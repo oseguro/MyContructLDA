@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="panel-heading">
-                    <p>Inserido em: {{ projeto.data_registo }}</p>
+                    <p>Inserido em: {{ projeto.created_at|date:'d-m-Y, H:m' }}</p>
                 </div>
             </div>
         </a>
