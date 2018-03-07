@@ -4,9 +4,15 @@
 <div class="row" style="margin:3%">
     <h3>Projetos</h3>
 </div>
+
 <div class="row">
-    {% for projeto in projetos|dictsort:'created_at' %}
-    <div class="col-md-3">
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Pesquisar</button>
+  </form>
+
+    {% for projeto in filter.qs|dictsort:'created_at' %}
+    <div class="col-md-3" id="resultados">
         <a href="{% url 'detail' projeto.slug %}">
             <div class="treasure panel panel-default">
                 <div class="panel-heading">
@@ -26,8 +32,9 @@
                   {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
             </button>
     </div>
-    {% endfor %}
+    {% endfor %} 
 </div>
+
 
 <!--<div class="tracker panel panel-default">
     <form enctype="multipart/form-data" action="post_treasure/" method="post">

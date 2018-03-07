@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .forms import *
+from .filters import *
 
 def home(request):
     treasures = Treasure.objects.all()
@@ -92,18 +93,18 @@ def register(request):
 
 
 def search(request):
-    search_val = request.GET.get('search', None)
+    search_val = request.GET.get('search',None)
+    projetos = Projetos.objects.all()
     if (search_val != None):
-        results = []
         projetos = Projetos.objects.filter(titulo__icontains=search_val)
-        for projeto in projetos:
-            json = {}
-            json['titulo'] = projeto.titulo
-            json['slug'] = '/projetos/detalhes/' + str(projeto.slug) + '/'
-            results.append(json)
-        return JsonResponse({'results':results})
-    else:
-        return render(request, 'search.html')
+        #for projeto in projetos:
+         #   json = {}
+         #   json['titulo'] = projeto.titulo
+         #   json['slug'] = '/projetos/detalhes/' + str(projeto.slug) + '/'
+         #   results.append(json)
+       # return JsonResponse({'results':results})
+    #else:
+    return render(request, 'projetos.html', {'projetos': projetos})
 
 
 
@@ -120,5 +121,14 @@ def categorias_view(request,slug):
 
 
 def projetos(request):
-    projetos = Projetos.objects.all()
-    return render(request, 'projetos.html', {'projetos': projetos})
+    #projetos = Projetos.objects.all()
+    #return render(request, 'projetos.html', {'projetos': projetos})
+    projetos_list = Projetos.objects.all()
+    projetos_filter = ProjetosFilter(request.GET, queryset=projetos_list)
+    return render(request, 'projetos/projetos.html', {'filter': projetos_filter})
+
+
+def pesquisa(request):
+    projetos_list = Projetos.objects.all()
+    projetos_filter = ProjetosFilter(request.GET.get('projetos', None), queryset=projetos_list)
+    return render(request, 'projetos.html', {'filter': projetos_filter})

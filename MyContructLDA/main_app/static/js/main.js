@@ -1,11 +1,9 @@
-$('#search-form').on('submit', function(event){
+/*$('#search-form').on('submit', function(event){
     event.preventDefault();
-
     $.ajax({
-        url : '/procurar/',
+        url : '/projetos/',
         method : 'GET',
         data : { search : $('#search-text').val() },
-        
         success : function(json){
             var element = $('#result-list');
             element.empty()
@@ -16,7 +14,7 @@ $('#search-form').on('submit', function(event){
             }
         }
     });
-});
+});*/
 
 
 // Função para o menu ficar com a class = active
@@ -30,7 +28,7 @@ $(function(){
 ////////////////////////////////////////////////
 
 
-$('button').on('click', function(event){
+$('button#likes').on('click', function(event){
     event.preventDefault();
     var element = $(this);
 

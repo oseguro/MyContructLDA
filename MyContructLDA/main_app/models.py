@@ -52,10 +52,12 @@ class Projetos(models.Model):
     slug = models.SlugField(max_length=100, blank=True)
     categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    tags = models.CharField(max_length=250)
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = slugify(self.titulo)
+            self.tags = self.titulo + ' ' + self.divisao + ' ' + self.categoria + ' ' + self.estilo + ' ' + self.distrito
         super(Projetos,self).save(*args, **kwargs)
 
     def __str__(self):
