@@ -120,15 +120,23 @@ def categorias_view(request,slug):
     return render(request, 'projetos_categorias.html', {'projetos': projeto})
 
 
-def projetos(request):
+def projetos_bck(request,tags):
     #projetos = Projetos.objects.all()
     #return render(request, 'projetos.html', {'projetos': projetos})
-    projetos_list = Projetos.objects.all()
-    projetos_filter = ProjetosFilter(request.GET, queryset=projetos_list)
-    return render(request, 'projetos/projetos.html', {'filter': projetos_filter})
+    projetos_list = Projetos.objects.filter(tags__icontains=tags)
+    return render(request, 'projetos.html', {'projetos': projetos_list})
 
 
 def pesquisa(request):
     projetos_list = Projetos.objects.all()
     projetos_filter = ProjetosFilter(request.GET.get('projetos', None), queryset=projetos_list)
     return render(request, 'projetos.html', {'filter': projetos_filter})
+
+
+
+def projetos(request):
+    #projetos = Projetos.objects.all()
+    #return render(request, 'projetos.html', {'projetos': projetos})
+    projetos_list = Projetos.objects.all()
+    projetos_filter = ProjetosFilter(request.GET, queryset=projetos_list)
+    return render(request, 'projetos/projetos.html', {'filter': projetos_filter})

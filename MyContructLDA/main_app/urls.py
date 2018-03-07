@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^estilos/(?P<slug>[-\w]+)/$', views.estilos_view, name = 'projetos_estilo'),
     url(r'^categorias/(?P<slug>[-\w]+)/$', views.categorias_view, name = 'projetos_categorias'),
     url(r'^projetos/$', FilterView.as_view(filterset_class=ProjetosFilter, template_name='projetos.html'), name = 'projetos'),
+    #url(r'^projetos/$', views.projetos, name = 'projetos'),
     url(r'^procurar/$',views.search, name='procurar'),
     url(r'^pesquisa/$',views.pesquisa, name='pesquisa'),
 ]
