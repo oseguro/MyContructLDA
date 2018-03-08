@@ -7,24 +7,25 @@
 <div class="row">
     {% for projeto in projetos %}
     <div class="col-md-3">
-        <a href="{% url 'detail' projeto.slug %}">
+        
             <div class="treasure panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title">{{ projeto.titulo }}</h2>
                 </div>
                 <div class="panel-body">
                     <div class="treasure-photo">
-                        <img src="{{ projeto.imagem.url }}" alt="" height="250px" />
+                      <a href="{% url 'detail' projeto.slug %}">  <img src="{{ projeto.imagem.url }}" alt="" height="250px" /> </a>
                     </div>
                 </div>
                 <div class="panel-heading">
                     <p>Inserido em: {{ projeto.created_at|date:'d-m-Y, H:m' }}</p>
+                      <button id="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
+                            {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
+                      </button>
                 </div>
             </div>
-        </a>
-            <button id="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
-                  {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
-            </button>
+      
+          
     </div>
     {% endfor %}
 </div>
