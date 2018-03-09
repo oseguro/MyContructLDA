@@ -74,18 +74,17 @@ class TipoImovel(models.Model):
 
 
 class PedidoOrcamento(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     cod_postal = models.CharField(max_length=100)
     categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
+    estilo = models.ForeignKey('Estilo', on_delete=models.CASCADE)
     largura =  models.DecimalField(max_digits=10, decimal_places=2)
     comprimento = models.DecimalField(max_digits=10, decimal_places=2)
+    area = models.DecimalField(max_digits=10, decimal_places=2)
     descricao = models.CharField(max_length=250)
     tipo_imovel = models.ForeignKey('TipoImovel', on_delete=models.CASCADE)
-
     
     def __str__(self):
         return self.descricao
-
 
 
 
@@ -101,3 +100,13 @@ class Categoria(models.Model):
     def __str__(self):
         return self.categoria
 
+
+
+
+class FotosProjeto(models.Model):
+    projeto = models.ForeignKey('Projetos', on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
+    imagem = models.ImageField(upload_to='treasure_images', default='media/default.png')   
+    
+    def __str__(self):
+        return self.projeto

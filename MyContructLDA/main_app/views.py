@@ -57,18 +57,21 @@ def login_view(request):
             username=form.cleaned_data['username']
             password=form.cleaned_data['password']
             user = authenticate(username=username, password=password)
+
             if user is not None:
                 # the password verified for the user
                 if user.is_active:
-                    print("User is valid, active and authenticated")
+                    #print("User is valid, active and authenticated")
                     login(request, user)
                     return HttpResponseRedirect('/')
-                    #return Index(request)
                 else:
-                    print("The password is valid, but the account has been disabled!")
+                     error = 'A palavra chave é valida, mas a conta foi desativada!'
+                     return render(request, 'login.html', {'form':form, 'error': error})
             else:
                 # the authentication system was unable to verify the username and password
-                print("The username and password were incorrect.")
+                error='O nome de utilizador ou palavra chave estão incorretos.'
+                return render(request, 'login.html', {'form':form, 'error': error})
+    
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})

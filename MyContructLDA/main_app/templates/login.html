@@ -6,7 +6,9 @@
 <form method="post" action=".">
     {% csrf_token %}
     {{ form.as_p }}
+    <strong><p style="color:red; margin:5px">{{error}}</p></strong>
     <input class="btn btn-primary" type="submit" value="Submit" />
 </form>
+    
 
 {% endblock %}

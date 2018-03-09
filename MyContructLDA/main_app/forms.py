@@ -36,3 +36,15 @@ class ProjetosForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(label='User Name', max_length=64)
     password = forms.CharField(widget=forms.PasswordInput())
+
+
+class OrcamentosForm(forms.ModelForm):
+    class Meta:
+        model = PedidoOrcamento
+        fields = ['cod_postal','categoria','estilo','largura','comprimento','area','descricao','tipo_imovel']
+
+
+class FotosProjetoFrom(forms.ModelForm):
+    class Meta:
+        model = FotosProjeto
+        fields = ['imagem','projeto']
