@@ -44,9 +44,9 @@ def like_treasure(request):
 
 def profile(request, username):
     user = User.objects.get(username=username)
-    treasures = Treasure.objects.filter(user=user)
-    print('treasures', treasures)
-    return render(request, 'profile.html',{'username': username, 'treasures': treasures})
+    #projetos = Projetos.objects.filter(user=user)
+    #print('treasures', treasures)
+    return render(request, 'profile.html',{'username': username,})
 
 
 
