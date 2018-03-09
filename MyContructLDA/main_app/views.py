@@ -3,9 +3,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from .models import *
 from .forms import *
 from .filters import *
+from django.core.exceptions import ValidationError
 
 def home(request):
     treasures = Treasure.objects.all()
@@ -86,13 +88,16 @@ def logout_view(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/login/')
+        f = CustomUserCreationForm(request.POST)
+        if f.is_valid():
+            f.save()
+            sucesso = 'Conta criada com sucesso!'
+            return render(request, 'registration.html', {'sucesso': sucesso, 'form':f})
+
     else:
-        form = UserCreationForm()
-    return render(request, 'registration.html', {'form': form})
+        f = CustomUserCreationForm()
+
+    return render(request, 'registration.html', {'form': f})
 
 
 def search(request):
