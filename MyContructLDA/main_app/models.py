@@ -82,7 +82,8 @@ class PedidoOrcamento(models.Model):
     area = models.DecimalField(max_digits=10, decimal_places=2)
     descricao = models.CharField(max_length=250)
     tipo_imovel = models.ForeignKey('TipoImovel', on_delete=models.CASCADE)
-    
+    email = models.EmailField(max_length=250)
+
     def __str__(self):
         return self.descricao
 

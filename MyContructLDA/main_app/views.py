@@ -8,6 +8,7 @@ from .models import *
 from .forms import *
 from .filters import *
 from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 def home(request):
     treasures = Treasure.objects.all()
@@ -91,8 +92,8 @@ def register(request):
         f = CustomUserCreationForm(request.POST)
         if f.is_valid():
             f.save()
-            sucesso = 'Conta criada com sucesso!'
-            return render(request, 'registration.html', {'sucesso': sucesso, 'form':f})
+            messages.success(request, 'Conta criada com sucesso!')
+            return render(request, 'registration.html',{'form':f})
 
     else:
         f = CustomUserCreationForm()

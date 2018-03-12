@@ -1,7 +1,8 @@
 from django import forms
 from .models import *
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class TreasureForm(forms.ModelForm):
     class Meta:
@@ -43,7 +44,7 @@ class LoginForm(forms.Form):
 class OrcamentosForm(forms.ModelForm):
     class Meta:
         model = PedidoOrcamento
-        fields = ['cod_postal','categoria','estilo','largura','comprimento','area','descricao','tipo_imovel']
+        fields = ['cod_postal','categoria','estilo','largura','comprimento','area','descricao','tipo_imovel','email']
 
 
 class FotosProjetoFrom(forms.ModelForm):
@@ -64,23 +65,21 @@ class CustomUserCreationForm(forms.Form):
         username = self.cleaned_data['username'].lower()
         r = User.objects.filter(username=username)
         if r.count():
-            raise  ValidationError("O nome de utilizador já existe")
+            raise  ValidationError('O nome de utilizador já existe')
         return username
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
         r = User.objects.filter(email=email)
         if r.count():
-            raise  ValidationError("Email já existe")
+            raise  ValidationError('O email já existe')
         return email
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
-
         if password1 and password2 and password1 != password2:
-            raise ValidationError("Palavra chave não é igual")
-
+            raise  ValidationError('Palavra chave não é igual')
         return password2
 
     def save(self, commit=True):
