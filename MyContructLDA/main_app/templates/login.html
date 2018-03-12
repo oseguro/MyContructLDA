@@ -5,9 +5,30 @@
 <h1>Página de entrada</h1>
 <form method="post" action=".">
     {% csrf_token %}
-    {{ form.as_p }}
-    <strong><p style="color:red; margin:5px">{{error}}</p></strong>
-    <input class="btn btn-primary" type="submit" value="Entrar" />
+    <table class="tabela">
+        <tr>
+            <td>
+                Nome de utilizador:
+            </td>
+            <td>
+                {{ form.username}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Palavra chave:
+            </td>
+            <td>
+                {{ form.password}}
+            </td>
+        </tr>
+    <tr>
+        <td colspan="2">
+            <strong><p style="color:red; margin:5px">{{error}}</p></strong>
+            <input class="btn btn-primary" type="submit" value="Entrar" />
+        </td>
+    </tr>
+    </table>
 </form>
     
 

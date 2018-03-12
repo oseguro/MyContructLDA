@@ -2,12 +2,50 @@
 {% load staticfiles %}
 {% block content %}
 
-<h1>Registration</h1>
+<h1>Registo</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <strong><p style="color:red; margin:5px">{{sucesso}}</p></strong>
-    <input class="btn btn-primary" type="submit" value="Registar" />
+    <table class="tabela">
+        <tr>     
+            <td>
+                Nome de Utilizador: 
+            </td>
+            <td>
+                {{ form.username }}
+            </td>
+        </tr>
+            <tr>     
+            <td>
+                Email: 
+            </td>
+            <td>
+                {{ form.email }}
+            </td>
+        </tr>
+        <tr>     
+            <td>
+                Palavra chave: 
+            </td>
+            <td>
+                {{ form.password1 }}
+            </td>
+        </tr>
+                <tr>     
+            <td>
+                Confirmar palavra chave: 
+            </td>
+            <td>
+                {{ form.password2 }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <strong><p style="color:red; margin:5px">{{sucesso}}</p></strong>
+                <input class="btn btn-primary" type="submit" value="Registar" />
+            </td>
+        </tr>
+    </table>
+
 </form>
 
 {% endblock %}

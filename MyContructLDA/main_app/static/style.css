@@ -140,6 +140,31 @@ h1 {
   width: 100%;
 }
 
+.tabela{
+  float: left;
+  margin-top: 10px;
+  width: 35%;
+}
+
+.tabela tr {
+  border-bottom: 1px solid #ece4cf;
+}
+
+.tabela td,
+.tabela th {
+  font-weight: bold;
+  font-size: 1em;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  vertical-align: baseline;
+}
+
+.tabela th {
+  color: #e0ccb2;
+  white-space: nowrap;
+}
+
+
 .fieldWrapper{
  font-size: 10px;
  color: #263d2c;
