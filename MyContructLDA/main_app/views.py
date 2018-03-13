@@ -30,6 +30,17 @@ def post_treasure(request):
        
     return HttpResponseRedirect('/')
 
+def post_orcamento(request):
+    if request.method == 'POST':
+        form = OrcamentosForm(request.POST)
+        if form.is_valid():
+            form.save(commit = True)
+            return render(request, 'orcamentos.html',{'form':form})
+    else:
+        form = OrcamentosForm()
+
+    return render(request, 'orcamentos.html', {'form': form})
+         
 
 def like_treasure(request):
     projeto_id = request.POST.get('projeto_id', None)

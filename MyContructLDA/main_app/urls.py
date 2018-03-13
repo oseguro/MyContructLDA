@@ -20,6 +20,7 @@ urlpatterns = [
     #url(r'^projetos/$', views.projetos, name = 'projetos'),
     url(r'^procurar/$',views.search, name='procurar'),
     url(r'^pesquisa/$',views.pesquisa, name='pesquisa'),
+    url(r'^orcamento/$',views.post_orcamento, name='orcamento'),
 ]
 
 if settings.DEBUG:

@@ -42,9 +42,11 @@ class LoginForm(forms.Form):
 
 
 class OrcamentosForm(forms.ModelForm):
+    cod_postal = forms.CharField(label='Código Postal', min_length=4, max_length=100)
+    descricao = forms.CharField(label='Descrição', min_length=4, max_length=250, widget=forms.Textarea)
     class Meta:
         model = PedidoOrcamento
-        fields = ['cod_postal','categoria','estilo','largura','comprimento','area','descricao','tipo_imovel','email']
+        fields = ['cod_postal','tipo_imovel','categoria','estilo','largura','comprimento','area','descricao','email']
 
 
 class FotosProjetoFrom(forms.ModelForm):
