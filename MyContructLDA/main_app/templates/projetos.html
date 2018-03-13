@@ -9,8 +9,14 @@
     <div class="col-md-3">
   <form method="get">
     <strong><p>Filtro de Pesquisa:</p></strong>
-    {{ filter.form.as_p }}
-    <button type="submit">Pesquisar</button>
+    <table class="tabela">
+    {{ filter.form.as_table}}
+    <tr>
+        <td>
+            <button type="submit">Pesquisar</button>
+        </td>
+    </tr>
+    </table>
   </form>
     </div>
     {% for projeto in filter.qs|dictsort:'created_at' %}
