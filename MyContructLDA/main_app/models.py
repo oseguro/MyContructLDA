@@ -77,12 +77,11 @@ class PedidoOrcamento(models.Model):
     cod_postal = models.CharField(max_length=100)
     categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
     estilo = models.ForeignKey('Estilo', on_delete=models.CASCADE)
-    largura =  models.DecimalField(max_digits=10, decimal_places=2)
-    comprimento = models.DecimalField(max_digits=10, decimal_places=2)
     area = models.DecimalField(max_digits=10, decimal_places=2)
     descricao = models.CharField(max_length=250)
     tipo_imovel = models.ForeignKey('TipoImovel', on_delete=models.CASCADE)
     email = models.EmailField(max_length=250)
+    divisao = models.ForeignKey('Divisao', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.descricao

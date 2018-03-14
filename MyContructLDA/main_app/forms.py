@@ -17,6 +17,12 @@ class CategoriaForm(forms.ModelForm):
         fields = ['categoria','slug']
 
 
+class DivisaoForm(forms.ModelForm):
+    class Meta:
+        model = Divisao
+        fields = ['divisao']
+
+
 class TipoImovelForm(forms.ModelForm):
     class Meta:
         model = TipoImovel
@@ -45,9 +51,11 @@ class OrcamentosForm(forms.ModelForm):
     cod_postal = forms.CharField(label='Código Postal', min_length=4, max_length=100)
     descricao = forms.CharField(label='Descrição', max_length=250, widget=forms.Textarea)
     email = forms.EmailField(label='Email',max_length=250)
+    divisao = forms.ModelChoiceField(queryset=Divisao.objects.all(), label='Divisão')
+    area = forms.DecimalField(label='Área',max_digits=10, decimal_places=2)
     class Meta:
         model = PedidoOrcamento
-        fields = ['cod_postal','tipo_imovel','categoria','estilo','largura','comprimento','area','descricao','email']
+        fields = ['cod_postal','tipo_imovel','divisao','categoria','estilo','area','descricao','email']
 
 
 class FotosProjetoFrom(forms.ModelForm):
