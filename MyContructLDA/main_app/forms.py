@@ -38,7 +38,7 @@ class EstiloForm(forms.ModelForm):
 class ProjetosForm(forms.ModelForm):
     class Meta:
         model = Projetos
-        fields = ['data_registo','titulo','imagem', 'distrito','descricao','divisao','estilo','likes','slug','categoria']
+        fields = ['data_registo','titulo','imagem', 'distrito','descricao','divisao','estilo','likes','slug','categoria','area']
 
 
 
@@ -52,7 +52,7 @@ class OrcamentosForm(forms.ModelForm):
     descricao = forms.CharField(label='Descrição', max_length=250, widget=forms.Textarea)
     email = forms.EmailField(label='Email',max_length=250)
     divisao = forms.ModelChoiceField(queryset=Divisao.objects.all(), label='Divisão')
-    area = forms.DecimalField(label='Área',max_digits=10, decimal_places=2)
+    area = forms.DecimalField(label='Área em m2',max_digits=10, decimal_places=2)
     class Meta:
         model = PedidoOrcamento
         fields = ['cod_postal','tipo_imovel','divisao','categoria','estilo','area','descricao','email']

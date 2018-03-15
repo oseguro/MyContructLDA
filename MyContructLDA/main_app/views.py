@@ -9,6 +9,7 @@ from .forms import *
 from .filters import *
 from django.core.exceptions import ValidationError
 from django.contrib import messages
+from django.core.mail import send_mail
 
 def home(request):
     treasures = Treasure.objects.all()
@@ -35,6 +36,9 @@ def post_orcamento(request):
         form = OrcamentosForm(request.POST)
         if form.is_valid():
             form.save(commit = True)
+            send_mail('MyContructLDA', 'O Pedido de orçamento foi submetido. Será contatado o mais breve possivel.', 'osmarseguro@gmail.com', [request.POST['email']])
+            send_mail('MyContructLDA', 'Tem um novo pedido de orçamento: \n'+'Descrição: '+request.POST['descricao']+'\nConsulte o website para mais detalhes.', 'osmarseguro@gmail.com', ['osmarseguro@gmail.com'])
+            form = OrcamentosForm()
             return render(request, 'orcamentos.html',{'form':form})
     else:
         form = OrcamentosForm()
