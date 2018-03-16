@@ -11,6 +11,15 @@
             {{form.as_table}}
 
             <tr>
+                <td colspan="2">
+                     {% if messages %}
+                         {% for message in messages %}
+                            <strong> <p style="color:red">{{ message }}</p></strong>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <td>
                         <input class="btn btn-primary" type="submit" value="Enviar" />
                 </td>   

@@ -19,8 +19,13 @@
     </div>
     <div class="col-md-5">
     {% if user.is_authenticated %}
-        <a class="navbar-text navbar-right" href="{% url 'profile' user.username %}">Benvindo ao MyContructLDA, {{ user.username }}</a>
-        <a class="navbar-text navbar-right" href="{% url 'Logout' %}">Sair</a>
+        {% if user.is_superuser %}
+             <a class="navbar-text navbar-right" href="{% url 'profileadmin' user.username %}">Benvindo Administrador, {{ user.username }}</a>
+             <a class="navbar-text navbar-right" href="{% url 'Logout' %}">Sair</a>
+        {% else %}
+              <a class="navbar-text navbar-right" href="{% url 'profile' user.username %}">Benvindo ao MyContructLDA, {{ user.username }}</a>
+              <a class="navbar-text navbar-right" href="{% url 'Logout' %}">Sair</a>
+        {%endif%}
     {% else %}
         <div class="navbar-text navbar-right"><a href="{% url 'Login' %}">Entrar</a> | <a href="{% url 'register' %}">Registo</a></div>
     {% endif %}
@@ -33,6 +38,9 @@
       <li><a href='#'>Quem somos</a></li>
       <li><a href='#'>Contatos</a></li>
       <li><a href='#'>Parcerias</a></li>
+       {% if user.is_superuser %}
+       <li><a href='#'>Pedidos</a></li>
+       {% endif %}
     </ul>
  </div>
   <main class="container">

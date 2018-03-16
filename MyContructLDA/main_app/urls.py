@@ -8,6 +8,7 @@ from .filters import *
 urlpatterns = [
     url(r'^$', views.home, name = 'home'),
     url(r'^user/(\w+)/$', views.profile, name='profile'),
+    url(r'^admin/(\w+)/$', views.profileadmin, name='profileadmin'),
     url(r'post_treasure/', views.post_treasure, name='post_treasure'),
     url(r'^projetos/detalhes/(?P<slug>[-\w]+)/$', views.detail, name = 'detail'),
     url(r'^login/$', views.login_view, name='Login'),

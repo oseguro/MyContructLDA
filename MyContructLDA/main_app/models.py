@@ -83,7 +83,8 @@ class PedidoOrcamento(models.Model):
     tipo_imovel = models.ForeignKey('TipoImovel', on_delete=models.CASCADE)
     email = models.EmailField(max_length=250)
     divisao = models.ForeignKey('Divisao', on_delete=models.CASCADE)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.descricao
 

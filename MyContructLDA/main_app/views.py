@@ -10,6 +10,7 @@ from .filters import *
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     treasures = Treasure.objects.all()
@@ -38,6 +39,7 @@ def post_orcamento(request):
             form.save(commit = True)
             send_mail('MyContructLDA', 'O Pedido de orçamento foi submetido. Será contatado o mais breve possivel.', 'osmarseguro@gmail.com', [request.POST['email']])
             send_mail('MyContructLDA', 'Tem um novo pedido de orçamento: \n'+'Descrição: '+request.POST['descricao']+'\nConsulte o website para mais detalhes.', 'osmarseguro@gmail.com', ['osmarseguro@gmail.com'])
+            messages.success(request, 'Pedido submetido!')
             form = OrcamentosForm()
             return render(request, 'orcamentos.html',{'form':form})
     else:
@@ -66,6 +68,21 @@ def profile(request, username):
     #print('treasures', treasures)
     return render(request, 'profile.html',{'username': username,})
 
+def profileadmin(request, username):
+    user = User.objects.get(username=username)
+    #projetos = Projetos.objects.filter(user=user)
+    #print('treasures', treasures)
+    pedidosList = PedidoOrcamento.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(pedidosList, 10)
+    try:
+        pedidos = paginator.page(page)
+    except PageNotAnInteger:
+        pedidos = paginator.page(1)
+    except EmptyPage:
+        pedidos = paginator.page(paginator.num_pages)
+    return render(request, 'profileadmin.html',{'username': username,'pedidos': pedidos})
 
 
 def login_view(request):
@@ -164,3 +181,4 @@ def projetos(request):
     projetos_list = Projetos.objects.all()
     projetos_filter = ProjetosFilter(request.GET, queryset=projetos_list)
     return render(request, 'projetos/projetos.html', {'filter': projetos_filter})
+
