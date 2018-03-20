@@ -4,6 +4,8 @@ from django.views.static import serve
 from . import views
 from django_filters.views import FilterView
 from .filters import *
+from .models import *
+
 
 urlpatterns = [
     url(r'^$', views.home, name = 'home'),
@@ -17,8 +19,8 @@ urlpatterns = [
     url(r'^register/$', views.register, name = 'register'),
     url(r'^estilos/(?P<slug>[-\w]+)/$', views.estilos_view, name = 'projetos_estilo'),
     url(r'^categorias/(?P<slug>[-\w]+)/$', views.categorias_view, name = 'projetos_categorias'),
-    url(r'^projetos/$', FilterView.as_view(filterset_class=ProjetosFilter, template_name='projetos.html'), name = 'projetos'),
-    #url(r'^projetos/$', views.projetos, name = 'projetos'),
+    url(r'^projetos/$', FilterView.as_view(filterset_class=ProjetosFilter, template_name='projetos.html',paginate_by=10), name = 'projetos'), 
+    #url(r'^projetos/$', CustomFilterView.as_view(), name = 'projetos'), 
     url(r'^procurar/$',views.search, name='procurar'),
     url(r'^pesquisa/$',views.pesquisa, name='pesquisa'),
     url(r'^orcamento/$',views.post_orcamento, name='orcamento'),
@@ -28,3 +30,5 @@ if settings.DEBUG:
     urlpatterns += [
         url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT,}),
     ]
+
+

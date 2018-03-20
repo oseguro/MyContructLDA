@@ -12,6 +12,8 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
+
 def home(request):
     treasures = Treasure.objects.all()
     categorias = Categoria.objects.all()
@@ -176,9 +178,8 @@ def pesquisa(request):
 
 
 def projetos(request):
-    #projetos = Projetos.objects.all()
-    #return render(request, 'projetos.html', {'projetos': projetos})
     projetos_list = Projetos.objects.all()
     projetos_filter = ProjetosFilter(request.GET, queryset=projetos_list)
     return render(request, 'projetos/projetos.html', {'filter': projetos_filter})
+
 

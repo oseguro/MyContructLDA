@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+
 <div class="row" style="margin:3%">
     <h3>Projetos</h3>
 </div>
@@ -19,7 +20,7 @@
     </table>
   </form>
     </div>
-    {% for projeto in filter.qs|dictsort:'created_at' %}
+    {% for projeto in object_list|dictsort:'created_at' %}
     <div class="col-md-3">
         
             <div class="treasure panel panel-default">
@@ -41,10 +42,10 @@
             </div>
      
     </div>
-    {% endfor %} 
-      
+        {% empty %}
+        <p style="color:red;margin-left:30px">Sem resultados para apresentar.</p>
+    {% endfor %}
 </div>
-
 
 <!--<div class="tracker panel panel-default">
     <form enctype="multipart/form-data" action="post_treasure/" method="post">
@@ -53,6 +54,30 @@
         <input class="btn btn-primary" type="submit" value="Submit"/>
     </form>
 </div>-->
+<div class="row">
+  <div class="col-md-4">
+  </div>
+   <div class="col-md-4">
 
+
+  </div>
+    <div class="col-md-4">
+      <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><</a>
+        {% endif %}
+
+        <span class="current">
+          Página {{ page_obj.number }} de {{ paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">></a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

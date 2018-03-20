@@ -164,6 +164,9 @@ h1 {
   white-space: nowrap;
 }
 
+.tabela span{
+  visibility: hidden
+}
 
 .fieldWrapper{
  font-size: 10px;
