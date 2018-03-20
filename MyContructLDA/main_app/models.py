@@ -108,6 +108,7 @@ class FotosProjeto(models.Model):
     projeto = models.ForeignKey('Projetos', on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     imagem = models.ImageField(upload_to='treasure_images', default='media/default.png')   
-    
+    descricao = models.CharField(max_length=50)
+
     def __str__(self):
-        return self.projeto
+        return self.descricao

@@ -25,7 +25,8 @@ def home(request):
 
 def detail(request, slug):
     projeto = Projetos.objects.get(slug=slug)
-    return render(request, 'detail.html', {'projeto': projeto})
+    fotos_projeto = FotosProjeto.objects.filter(projeto = projeto)
+    return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto})
 
 def post_treasure(request):
     form = TreasureForm(request.POST,request.FILES)
