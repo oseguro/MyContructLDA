@@ -25,7 +25,9 @@
                           <blockquote>
                               <p>{{ foto.descricao }}</p>
                           </blockquote>
-                          <img src="{{ foto.imagem.url }}" alt="" height="250px" />
+                            <div  class="treasure-photo">
+                              <img src="{{ foto.imagem.url }}" alt="" max-height="250px" />
+                            </div>
                       </div>
                   {% endfor %}
                   </div>

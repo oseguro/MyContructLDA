@@ -94,12 +94,12 @@ h1 {
 
 .treasure-photo-detail {
   background: #fdf2e1;
-  float: left;
-  margin-right: 5%;
+  float: right;
+  margin-right: 10%;
   padding: 5px;
   position: relative;
   text-align: center;
-  width: 50%;
+  width: 80%;
 }
 
 .treasure-photo img {
