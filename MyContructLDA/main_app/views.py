@@ -186,11 +186,12 @@ def projetos(request):
 
 def addprojeto(request):
     if request.method == 'POST':
-        f = ProjetosForm(request.POST)
+        f = ProjetosForm(request.POST, request.FILES)
         if f.is_valid():
-            f.save()
-            messages.success(request, 'Projeto adicionado!')
-            return render(request, 'addprojeto.html',{'form':f})
+            projeto = f.save(commit = False)
+            projeto.likes = 0
+            projeto.save()
+            return HttpResponseRedirect('/addprojeto')
 
     else:
         f = ProjetosForm()
@@ -201,13 +202,13 @@ def addprojeto(request):
 
 def addfoto(request):
     if request.method == 'POST':
-        f = FotosProjetoForm(request.POST)
+        f = FotosProjetoFrom(request.POST)
         if f.is_valid():
             f.save()
             messages.success(request, 'Foto adicionada!')
             return render(request, 'addfoto.html',{'form':f})
 
     else:
-        f = FotosProjetoForm()
+        f = FotosProjetoFrom()
 
     return render(request, 'addfoto.html', {'form': f})

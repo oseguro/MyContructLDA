@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class TreasureForm(forms.ModelForm):
     class Meta:
         model = Treasure
@@ -36,6 +37,10 @@ class EstiloForm(forms.ModelForm):
 
 
 class ProjetosForm(forms.ModelForm):
+    divisao = forms.ModelChoiceField(queryset=Divisao.objects.all(), label='Divisão')
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), label='Categoria')
+    estilo  = forms.ModelChoiceField(queryset=Estilo.objects.all(), label='Estilo')
+    imagem = forms.ImageField()
     class Meta:
         model = Projetos
         fields = ['data_registo','titulo','imagem', 'distrito','descricao','divisao','estilo','likes','slug','categoria','area']

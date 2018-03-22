@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
+
+
+def get_image_path(instance, filename):
+    return '/'.join(['treasure_images', str(instance.name), filename])
+
+
+
 class Treasure(models.Model):
     name = models.CharField(max_length=100)
     value = models.DecimalField(max_digits=10,decimal_places=2)
@@ -57,7 +64,7 @@ class Projetos(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = slugify(self.titulo)
-            self.tags = self.titulo + ' ' + self.divisao + ' ' + self.categoria + ' ' + self.estilo + ' ' + self.distrito
+            self.tags = self.titulo + ' ' + self.distrito
         super(Projetos,self).save(*args, **kwargs)
 
     def __str__(self):
