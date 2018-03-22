@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
-
+from datetime import datetime
 
 
 def get_image_path(instance, filename):
@@ -63,7 +63,9 @@ class Projetos(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.slug = slugify(self.titulo)
+            dt = datetime.now()
+            slug = self.titulo + '' + dt.now().strftime("%Y%m%d%S")
+            self.slug = slugify(slug)
             self.tags = self.titulo + ' ' + self.distrito
         super(Projetos,self).save(*args, **kwargs)
 
