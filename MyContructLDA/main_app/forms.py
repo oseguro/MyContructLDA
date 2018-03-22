@@ -61,7 +61,7 @@ class OrcamentosForm(forms.ModelForm):
 class FotosProjetoFrom(forms.ModelForm):
     class Meta:
         model = FotosProjeto
-        fields = ['imagem','projeto']
+        fields = ['imagem','projeto','descricao']
 
 
 

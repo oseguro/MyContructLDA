@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^procurar/$',views.search, name='procurar'),
     url(r'^pesquisa/$',views.pesquisa, name='pesquisa'),
     url(r'^orcamento/$',views.post_orcamento, name='orcamento'),
+    url(r'^addfotosprojeto/$',views.addfoto, name='addfoto'),
+    url(r'^addprojeto/$',views.addprojeto, name='addprojeto'),
 ]
 
 if settings.DEBUG:

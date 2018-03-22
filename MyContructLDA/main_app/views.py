@@ -184,3 +184,30 @@ def projetos(request):
     return render(request, 'projetos/projetos.html', {'filter': projetos_filter})
 
 
+def addprojeto(request):
+    if request.method == 'POST':
+        f = ProjetosForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages.success(request, 'Projeto adicionado!')
+            return render(request, 'addprojeto.html',{'form':f})
+
+    else:
+        f = ProjetosForm()
+
+    return render(request, 'addprojeto.html', {'form': f})
+
+
+
+def addfoto(request):
+    if request.method == 'POST':
+        f = FotosProjetoForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages.success(request, 'Foto adicionada!')
+            return render(request, 'addfoto.html',{'form':f})
+
+    else:
+        f = FotosProjetoForm()
+
+    return render(request, 'addfoto.html', {'form': f})

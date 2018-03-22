@@ -7,7 +7,7 @@
   <div class="treasure panel panel-default">
 
     <div class="panel-heading">
-          <h3 class="panel-title">{{ projeto.titulo }}</h3>
+          <p class="panel-title">{{ projeto.titulo }}</p>
           <!--<a class="panel-username" href="/user/{{treasure.user.username}}/">by: {{ treasure.user.username }}</a>-->
         </div>
 
@@ -44,7 +44,6 @@
       <table class="treasure-table">
         <tr>
           <th>
-          
             Distrito:
           </th>
           <td>{{ projeto.distrito }}</td>
@@ -59,7 +58,6 @@
         </tr>
         <tr>
           <th>
-            
             Divisão:
           </th>
           <td>{{ projeto.divisao }}</td>
@@ -70,19 +68,23 @@
           </th>
           <td>{{ projeto.area }}</td>
         </tr>
-         <tr>
-          <th> 
-            Descrição:
-          </th>
-          <td>{{ projeto.descricao }}</td>
-        </tr>
-                <tr>
+          <tr>
           <th>
-            
             Projeto realizado:
           </th>
           <td>{{ projeto.data_registo }}</td>
         </tr>
+         <tr>
+          <th> 
+            Descrição:
+          </th>
+        </tr>
+        <tr>
+          <td colspan="2">
+              <p>{{ projeto.descricao }}</p>
+          </td>
+        </tr>
+ 
       </table>
 
 
