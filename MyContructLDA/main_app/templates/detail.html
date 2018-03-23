@@ -91,8 +91,20 @@
     </div>
       <button id ="likes" data-id="{{projeto.id}}" class="btn btn-mini btn-danger glyphicon glyphicon-heart" type="button">
             {% if projeto.likes > 0 %} {{ projeto.likes }} {% endif %}
-      </button>
+      </button >
+      
+     
   </div>
 
 </div>
+ <a class="panel-project" style="margin-left:5%; font-size:1.3em" href="#">Pedir Orçamento para este projeto</a>
+</div>
+  {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <div class="row">
+          <h2>Inserção de Fotos para este projeto</h2>  
+
+        </div>
+        {%endif%}
+{%endif%}
 {% endblock %}

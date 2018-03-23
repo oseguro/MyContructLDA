@@ -13,9 +13,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-
 def home(request):
-    treasures = Treasure.objects.all()
     categorias = Categoria.objects.all()
     estilos = Estilo.objects.all();
     projetos = Projetos.objects.all().order_by('created_at')[:8]
@@ -141,13 +139,7 @@ def search(request):
     projetos = Projetos.objects.all()
     if (search_val != None):
         projetos = Projetos.objects.filter(titulo__icontains=search_val)
-        #for projeto in projetos:
-         #   json = {}
-         #   json['titulo'] = projeto.titulo
-         #   json['slug'] = '/projetos/detalhes/' + str(projeto.slug) + '/'
-         #   results.append(json)
-       # return JsonResponse({'results':results})
-    #else:
+        
     return render(request, 'projetos.html', {'projetos': projetos})
 
 
@@ -212,3 +204,4 @@ def addfoto(request):
         f = FotosProjetoFrom()
 
     return render(request, 'addfoto.html', {'form': f})
+

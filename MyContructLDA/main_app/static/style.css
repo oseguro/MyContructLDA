@@ -57,6 +57,11 @@ h1 {
   color: #263d2c;
 }
 
+.panel-project {
+  font-size: 1em;
+  color: #263d2c;
+}
+
 .panel-username {
   margin-left: 10px;
   font-size: 1.0em;
