@@ -16,15 +16,37 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
     categorias = Categoria.objects.all()
     estilos = Estilo.objects.all();
-    projetos = Projetos.objects.all().order_by('created_at')[:8]
+    projetos = Projetos.objects.all().order_by('-created_at')[:4]
     #projetos_top = reversed(projetos)
     form = TreasureForm()
-    return render(request, 'home.html', {'treasures': treasures,'projetos':projetos, 'categorias': categorias,'estilos': estilos,'form':form})
+    return render(request, 'home.html', {'projetos':projetos, 'categorias': categorias,'estilos': estilos,'form':form})
 
 def detail(request, slug):
     projeto = Projetos.objects.get(slug=slug)
     fotos_projeto = FotosProjeto.objects.filter(projeto = projeto)
-    return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto})
+    tipo_imovel = TipoImovel.objects.all();
+    form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+    f = FotosProjetoFrom(initial={'projeto':projeto})
+    if request.method == 'POST':
+        form = OrcamentosForm(request.POST)
+        f = FotosProjetoFrom(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(commit = True)
+            send_mail('MyContructLDA', 'O Pedido de orçamento foi submetido. Será contatado o mais breve possivel.', 'osmarseguro@gmail.com', [request.POST['email']])
+            send_mail('MyContructLDA', 'Tem um novo pedido de orçamento sobre um projeto já realizado por si: \n'+'Descrição: '+request.POST['descricao']+'\nConsulte o website para mais detalhes.', 'osmarseguro@gmail.com', ['osmarseguro@gmail.com'])
+            messages.success(request, 'Pedido submetido!')
+            form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+            return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto, 'form':form,'f':f})
+        elif f.is_valid():
+             f.save(commit = True)
+             form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+             f = FotosProjetoFrom(initial={'projeto':projeto})
+             return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto, 'form':form, 'f':f})  
+    else:
+        form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+        f = FotosProjetoFrom(initial={'projeto':projeto})
+
+    return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto, 'form':form,'f':f})
 
 def post_treasure(request):
     form = TreasureForm(request.POST,request.FILES)
@@ -47,7 +69,9 @@ def post_orcamento(request):
         form = OrcamentosForm()
 
     return render(request, 'orcamentos.html', {'form': form})
-         
+    
+
+
 
 def like_treasure(request):
     projeto_id = request.POST.get('projeto_id', None)
@@ -73,7 +97,7 @@ def profileadmin(request, username):
     user = User.objects.get(username=username)
     #projetos = Projetos.objects.filter(user=user)
     #print('treasures', treasures)
-    pedidosList = PedidoOrcamento.objects.all()
+    pedidosList = PedidoOrcamento.objects.all().order_by('-created_at')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(pedidosList, 10)

@@ -97,13 +97,58 @@
   </div>
 
 </div>
- <a class="panel-project" style="margin-left:5%; font-size:1.3em" href="#">Pedir Orçamento para este projeto</a>
+ <a  class="panel-project" href="#" style="margin-left:5%;"><img src="{% static "images/botao1.png" %}" style="width:200px;height:100px"/></a>
+ <div class="wrapper" style="margin-top:15px">
+   <form method="post">
+    {% csrf_token %}
+   <div style="margin:10px">
+     Email:</br>
+    {{form.email}}
+   </div>
+   <div style="margin:10px">
+     Tipo de imóvel:</br>
+     {{form.tipo_imovel}}
+   </div>
+    <div style="margin:10px">
+     O seu código-postal:</br>
+    {{form.cod_postal}}
+   </div>
+   <div  style="margin:10px">
+     Descrição</br>
+    {{form.descricao}}
+   </div>
+   <div style="visibility:hidden">
+     {{form.area}}
+      {{form.estilo}}
+       {{form.divisao}}
+         {{form.categoria}}
+   </div>
+    {% if messages %}
+                         {% for message in messages %}
+                            <strong> <p style="color:red">{{ message }}</p></strong>
+                        {% endfor %}
+                    {% endif %}
+    <input class="btn btn-primary" type="submit" value="Enviar" />
+   </form>
+ </div>
 </div>
   {% if user.is_authenticated %}
         {% if user.is_superuser %}
         <div class="row">
-          <h2>Inserção de Fotos para este projeto</h2>  
-
+          <form enctype="multipart/form-data" method="post">
+          <h2>Inserção de Fotos para este projeto</h2>
+            {% csrf_token %}
+              <table class="tabela">
+            {{f.as_table}}
+            <tr>
+                        <td>
+                                <input class="btn btn-primary" type="submit" value="Adicionar" />
+                        </td>   
+                    </tr>    
+            </table>
+            
+          </form>
+         
         </div>
         {%endif%}
 {%endif%}

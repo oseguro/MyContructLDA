@@ -98,6 +98,24 @@ class PedidoOrcamento(models.Model):
 
 
 
+class PedidoOrcamentoProjetoExistente(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=250)
+    cod_postal = models.CharField(max_length=100)
+    categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
+    estilo = models.ForeignKey('Estilo', on_delete=models.CASCADE)
+    area = models.DecimalField(max_digits=10, decimal_places=2)
+    tipo_imovel = models.ForeignKey('TipoImovel', on_delete=models.CASCADE)
+    email = models.EmailField(max_length=250)
+    divisao = models.ForeignKey('Divisao', on_delete=models.CASCADE)
+    projecto = models.ForeignKey('Projetos', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.titulo
+
+
+
+
 class Categoria(models.Model):
     categoria = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, blank=True)
@@ -117,7 +135,7 @@ class FotosProjeto(models.Model):
     projeto = models.ForeignKey('Projetos', on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     imagem = models.ImageField(upload_to='treasure_images', default='media/default.png')   
-    descricao = models.CharField(max_length=50)
+    descricao = models.CharField(max_length=250)
 
     def __str__(self):
         return self.descricao

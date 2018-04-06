@@ -1,21 +1,3 @@
-/*$('#search-form').on('submit', function(event){
-    event.preventDefault();
-    $.ajax({
-        url : '/projetos/',
-        method : 'GET',
-        data : { search : $('#search-text').val() },
-        success : function(json){
-            var element = $('#result-list');
-            element.empty()
-            for ( var i = 0, l = json.results.length; i < l; i++ ) {
-                element.append('<li class="list-group-item">' +
-                               '<a href="' + json.results[i].slug + '">'  + 
-                               json.results[i].titulo + '</a></li>');
-            }
-        }
-    });
-});*/
-
 
 // Função para o menu ficar com a class = active
 $(function(){
@@ -73,4 +55,16 @@ $.ajaxSetup({
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
     }
+});
+
+
+$(document).ready(function(){
+
+        $(".wrapper").hide();
+
+    $('.panel-project').click(function(){
+    $(".wrapper").slideToggle();
+    return false;
+    });
+
 });
