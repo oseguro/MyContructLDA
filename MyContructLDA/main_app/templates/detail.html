@@ -97,9 +97,10 @@
   </div>
 
 </div>
- <a  class="panel-project" href="#" style="margin-left:5%;"><img src="{% static "images/botao1.png" %}" style="width:200px;height:100px"/></a>
- <div class="wrapper" style="margin-top:15px">
+ <!--<a  class="panel-project" href="#" style="margin-left:5%;"><img src="{% static "images/botao1.png" %}" style="width:200px;height:100px"/></a>-->
+ <div class="wrapper2" style="margin-top:15px">
    <form method="post">
+     <h2>Pedido de Orçamento para este projeto</h2>
     {% csrf_token %}
    <div style="margin:10px">
      Email:</br>
@@ -122,6 +123,7 @@
       {{form.estilo}}
        {{form.divisao}}
          {{form.categoria}}
+         {{form.slug}}
    </div>
     {% if messages %}
                          {% for message in messages %}

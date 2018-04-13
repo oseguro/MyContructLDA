@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
@@ -25,7 +25,7 @@ def detail(request, slug):
     projeto = Projetos.objects.get(slug=slug)
     fotos_projeto = FotosProjeto.objects.filter(projeto = projeto)
     tipo_imovel = TipoImovel.objects.all();
-    form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+    form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234,'slug':projeto.slug})
     f = FotosProjetoFrom(initial={'projeto':projeto})
     if request.method == 'POST':
         form = OrcamentosForm(request.POST)
@@ -33,17 +33,17 @@ def detail(request, slug):
         if form.is_valid():
             form.save(commit = True)
             send_mail('MyContructLDA', 'O Pedido de orçamento foi submetido. Será contatado o mais breve possivel.', 'osmarseguro@gmail.com', [request.POST['email']])
-            send_mail('MyContructLDA', 'Tem um novo pedido de orçamento sobre um projeto já realizado por si: \n'+'Descrição: '+request.POST['descricao']+'\nConsulte o website para mais detalhes.', 'osmarseguro@gmail.com', ['osmarseguro@gmail.com'])
+            send_mail('MyContructLDA', 'Tem um novo pedido de orçamento sobre um projeto já realizado por si: \n'+'Descrição: '+request.POST['descricao']+'\nIdentificador do projeto: '+request.POST['slug']+'\nConsulte o website para mais detalhes.', 'osmarseguro@gmail.com', ['osmarseguro@gmail.com'])
             messages.success(request, 'Pedido submetido!')
-            form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+            form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234,'slug':projeto.slug})
             return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto, 'form':form,'f':f})
         elif f.is_valid():
              f.save(commit = True)
-             form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+             form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234,'slug':projeto.slug})
              f = FotosProjetoFrom(initial={'projeto':projeto})
              return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto, 'form':form, 'f':f})  
     else:
-        form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234})
+        form = OrcamentosForm(initial={'area':projeto.area,'estilo':projeto.estilo,'categoria':projeto.categoria, 'divisao':projeto.divisao, 'tipo_imovel':tipo_imovel,'cod_postal':1234,'slug':projeto.slug})
         f = FotosProjetoFrom(initial={'projeto':projeto})
 
     return render(request, 'detail.html', {'projeto': projeto, 'fotos': fotos_projeto, 'form':form,'f':f})
@@ -99,7 +99,6 @@ def profileadmin(request, username):
     #print('treasures', treasures)
     pedidosList = PedidoOrcamento.objects.all().order_by('-created_at')
     page = request.GET.get('page', 1)
-
     paginator = Paginator(pedidosList, 10)
     try:
         pedidos = paginator.page(page)
@@ -107,7 +106,29 @@ def profileadmin(request, username):
         pedidos = paginator.page(1)
     except EmptyPage:
         pedidos = paginator.page(paginator.num_pages)
+        
     return render(request, 'profileadmin.html',{'username': username,'pedidos': pedidos})
+
+
+def verpedidos(request):
+    pedidosList = PedidoOrcamento.objects.all().order_by('-created_at')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(pedidosList, 10)
+    try:
+        pedidos = paginator.page(page)
+    except PageNotAnInteger:
+        pedidos = paginator.page(1)
+    except EmptyPage:
+        pedidos = paginator.page(paginator.num_pages)
+        
+    return render(request, 'verpedidos.html',{'pedidos': pedidos})
+
+
+def apagarticket(request, id=None):
+    object = get_object_or_404(PedidoOrcamento, id=id)
+    object.delete()
+    return redirect("/verpedidos")
+
 
 
 def login_view(request):

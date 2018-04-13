@@ -60,7 +60,7 @@ class OrcamentosForm(forms.ModelForm):
     area = forms.DecimalField(label='Área em m2',max_digits=10, decimal_places=2)
     class Meta:
         model = PedidoOrcamento
-        fields = ['cod_postal','tipo_imovel','divisao','categoria','estilo','area','descricao','email']
+        fields = ['cod_postal','tipo_imovel','divisao','categoria','estilo','area','descricao','email','slug']
 
 
 class FotosProjetoFrom(forms.ModelForm):

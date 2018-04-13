@@ -92,7 +92,7 @@ class PedidoOrcamento(models.Model):
     email = models.EmailField(max_length=250)
     divisao = models.ForeignKey('Divisao', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    slug = models.CharField(max_length=100, default='novo')
     def __str__(self):
         return self.descricao
 

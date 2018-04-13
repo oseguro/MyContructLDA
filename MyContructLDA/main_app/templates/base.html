@@ -41,7 +41,7 @@
       <li><a href='#'>Contatos</a></li>
       <li><a href='#'>Parcerias</a></li>
        {% if user.is_superuser %}
-       <li><a href='#'>Pedidos</a></li>
+       <li><a href="{% url 'verpedidos'%}">Pedidos</a></li>
        {% endif %}
     </ul>
  </div>
